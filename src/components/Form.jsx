@@ -11,15 +11,17 @@ export default function Form() {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post("http://localhost:3000/" ,{
-                title: data.title,
-                description: data.content,
-            })
-            console.log("Form submitted succesfully:",response.data);
-        }catch (error) {
-            console.error("Error submitting form:", error)
+          await axios.post("http://localhost:3000/", {
+            title: data.title,
+            description: data.content,
+          });
+          alert("Blog added successfully!");
+          reset(); 
+          fetchBlogs(); 
+        } catch (error) {
+          console.error("Error submitting form:", error);
         }
-    };
+      };
 
     return (
         <form onSubmit = {handleSubmit(onSubmit)}>
