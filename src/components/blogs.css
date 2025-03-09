@@ -1,0 +1,12 @@
+.container {
+    display: grid;
+    gap: 16px;
+    padding: 16px;
+};
+
+.card {
+    padding: 16px;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: white;
+}
