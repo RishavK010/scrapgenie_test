@@ -1,46 +1,58 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import Form from './components/form'
+import { useState, useEffect } from "react";
+import axios from "axios";
+import BlogForm from "./components/BlogForm";
+import BlogList from "./components/BlogList";
+import "./App.css";
 
-function App() {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
+const API_URL = "http://localhost:3000/posts";
+
+const App = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchData = async() => {
-      try {
-        const response = await fetch('http://localhost:3000/');
-        if(!response.ok){
-          throw new Error('no network response')
-        }
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    fetchData();
-  },[]);
+    fetchBlogs();
+  }, []);
 
-  if(error) {
-    return <p className='error'>Error: {error}</p>;
-  }
+  const fetchBlogs = async () => {
+    try {
+      const response = await axios.get(API_URL);
+      setBlogs(response.data);
+    } catch (err) {
+      setError("Failed to fetch blogs.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const addBlog = async (newBlog) => {
+    try {
+      const response = await axios.post(API_URL, newBlog);
+      setBlogs((prevBlogs) => [...prevBlogs, response.data]);
+    } catch (err) {
+      setError("Failed to add blog.");
+    }
+  };
+
+  const deleteBlog = async (id) => {
+    try {
+      await axios.delete(`${API_URL}/${id}`);
+      setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog.id !== id));
+    } catch (err) {
+      setError("Failed to delete blog.");
+    }
+  };
 
   return (
-    <div className = "container">
-      <Form />
-      <h1 className='title'>Read Blogs</h1>
-      <h1 className='data-list-title'>Data Lists</h1>
-      <ul className='data-list'>
-        {data.map(item => (
-          <li key={item.id} className='data-item'>
-            <h2 className='data-title'>{item.title}</h2>
-            <p className='data-description'>{item.description}</p>
-          </li>
-        ))}
-      </ul>
+    <div className="container">
+      <h1 className="page-title">Simple Blog App</h1>
+      <BlogForm addBlog={addBlog} />
+      {loading && <p className="loading">Loading blogs...</p>}
+      {error && <p className="error">{error}</p>}
+      <BlogList blogs={blogs} deleteBlog={deleteBlog} />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

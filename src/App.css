@@ -1,151 +1,145 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-/* App.css */
-
-/* General Body Styling */
+/* General Styling */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Poppins", sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 90%;
+  max-width: 1000px;
+  background: #1e1e1e;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Title Styling */
+/* Title */
 .page-title {
-  color: #333;
   text-align: center;
   font-size: 2rem;
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
-.data-list-title {
-  color: #444;
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-}
-
-/* List Styling */
+/* Blog List */
 .data-list {
-  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
   padding: 0;
+  margin: 0;
 }
 
 .data-item {
-  background-color: #fafafa;
-  border: 1px solid #ddd;
+  background: #242424;
+  border-left: 5px solid #007bff;
   padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: calc(33.33% - 20px);
+  min-width: 280px;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 .data-item:hover {
-  background-color: #f1f1f1;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
-/* Data Item Title and Description */
 .data-title {
-  color: #333;
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-size: 1.3rem;
+  color: #80bfff;
+  margin-bottom: 5px;
 }
 
 .data-description {
-  color: #666;
   font-size: 1rem;
+  color: #b0b0b0;
   line-height: 1.5;
 }
 
-/* Error and Loading Messages */
-.error {
-  color: #f44336; /* Red for error */
-  text-align: center;
-  font-size: 18px;
+/* Buttons */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-.loading {
-  text-align: center;
-  font-size: 24px;
-  color: #888;
+button.delete-button {
+  background-color: #d32f2f;
+  color: white;
 }
 
-/* Form1 Component Styling */
-form {
+button.delete-button:hover {
+  background-color: #b71c1c;
+}
+
+/* Form */
+.blog-form {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   align-items: center;
-  margin-bottom: 30px;
 }
 
-form input,
-form button {
-  padding: 10px;
-  margin: 10px;
+.blog-form input,
+.blog-form textarea {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px;
   border-radius: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid #444;
+  font-size: 1rem;
+  background: #333;
+  color: #e0e0e0;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-form input {
-  width: 250px;
+.blog-form input:hover,
+.blog-form textarea:hover {
+  border-color: #80bfff;
+  box-shadow: 0 0 10px rgba(128, 191, 255, 0.5);
 }
 
-form button {
-  width: 100px;
-  background-color: #007bff;
+.blog-form input:focus,
+.blog-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.7);
+}
+
+.blog-form button {
+  background: #007bff;
   color: white;
-  border: none;
-  cursor: pointer;
+  font-size: 1rem;
 }
 
-form button:hover {
-  background-color: #0056b3;
+.blog-form button:hover {
+  background: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .data-item {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .data-item {
+    width: 100%;
+  }
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
 }

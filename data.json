@@ -1,21 +1,17 @@
 [
-   {
-      "id": 1,
-      "title": "This is my first blog",
-      "description": "This is the description of my first blog"
-   },
-   {
-      "id": 2,
-      "title": "This is my second blog",
-      "description": "welcome to my second blog"
-   },
-   {
-      "id": 3,
-      "title": "This is my third blog",
-      "description": "streak maintained! Welcome to my third blog"
-   },
-   {
-      "title": "this",
-      "description": "1st"
-   }
+  {
+    "id": 1,
+    "title": "first blog",
+    "description": "This is the description of my first blog"
+  },
+  {
+    "id": 2,
+    "title": "second blog",
+    "description": "welcome to my second blog"
+  },
+  {
+    "id": 3,
+    "title": "third blog",
+    "description": "streak maintained! Welcome to my third blog"
+  }
 ]
