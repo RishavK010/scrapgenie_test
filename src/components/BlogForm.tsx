@@ -1,12 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "../App.css";
 
-const BlogForm = ({ addBlog }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [error, setError] = useState("");
+interface BlogFormProps {
+  addBlog: (blog: { title: string; description: string }) => void;
+}
 
-  const handleSubmit = (e) => {
+const BlogForm: React.FC<BlogFormProps> = ({ addBlog }) => {
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!title.trim() || !description.trim()) {
       setError("Title and description are required.");

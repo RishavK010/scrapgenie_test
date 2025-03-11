@@ -1,15 +1,22 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import BlogForm from "./components/BlogForm";
 import BlogList from "./components/BlogList";
 import "./App.css";
 
+interface Blog {
+  id: number;
+  title: string;
+  description: string;
+}
+
 const API_URL = "http://localhost:3000/posts";
 
-const App = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+const App: React.FC = () => {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     fetchBlogs();
@@ -17,7 +24,7 @@ const App = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get<Blog[]>(API_URL);
       setBlogs(response.data);
     } catch (err) {
       setError("Failed to fetch blogs.");
@@ -26,16 +33,16 @@ const App = () => {
     }
   };
 
-  const addBlog = async (newBlog) => {
+  const addBlog = async (newBlog: Omit<Blog, "id">) => {
     try {
-      const response = await axios.post(API_URL, newBlog);
+      const response = await axios.post<Blog>(API_URL, newBlog);
       setBlogs((prevBlogs) => [...prevBlogs, response.data]);
     } catch (err) {
       setError("Failed to add blog.");
     }
   };
 
-  const deleteBlog = async (id) => {
+  const deleteBlog = async (id: number) => {
     try {
       await axios.delete(`${API_URL}/${id}`);
       setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog.id !== id));

@@ -1,6 +1,18 @@
+import React from "react";
 import "../App.css";
 
-const BlogList = ({ blogs, deleteBlog }) => {
+interface Blog {
+  id: number;
+  title: string;
+  description: string;
+}
+
+interface BlogListProps {
+  blogs: Blog[];
+  deleteBlog: (id: number) => void;
+}
+
+const BlogList: React.FC<BlogListProps> = ({ blogs, deleteBlog }) => {
   return (
     <div>
       <h2 className="data-list-title">Blog Posts</h2>
